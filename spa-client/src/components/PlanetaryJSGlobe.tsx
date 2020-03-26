@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 // @ts-ignore
 import * as Planetaryjs from "planetary.js";
 import worldData from "planetary.js/dist/world-110m.json";
 
-class PlanetaryJSGlobe extends React.Component {
-  componentDidMount() {
+const PlanetaryJSGlobe = () => {
+  const PLANET_CIRCUMFERENCE = 700;
+
+  useEffect(() => {
     const planet = Planetaryjs.planet();
     const canvas = document.getElementById("globe");
 
@@ -23,17 +25,21 @@ class PlanetaryJSGlobe extends React.Component {
     // load the drag plugin
     planet.loadPlugin(Planetaryjs.plugins.drag());
 
-    planet.projection.scale(50).translate([50, 50]);
+    planet.projection
+      .scale(PLANET_CIRCUMFERENCE / 2)
+      .translate([PLANET_CIRCUMFERENCE / 2, PLANET_CIRCUMFERENCE / 2]);
     planet.draw(canvas);
-  }
+  }, []);
 
-  render() {
-    return (
-      <div>
-        <canvas id="globe" width="100px" height="100px" />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <canvas
+        id="globe"
+        width={`${PLANET_CIRCUMFERENCE}px`}
+        height={`${PLANET_CIRCUMFERENCE}px`}
+      />
+    </div>
+  );
+};
 
 export default PlanetaryJSGlobe;
