@@ -11,38 +11,43 @@ const getStatsFromAPI = async () => {
 	try {
 		const summaryResp = await axios.get("https://api.covid19api.com/summary")
 		
-		const summary = summaryResp.data
-
-		// console.log('summary', summary)
-		
-		const uniqueCountries = summary.Countries.map(country => country.CountryCode)
-		
-		return uniqueCountries
-
-
-		
+		const countryStats = summaryResp.data.Countries
+		return countryStats		
 
 	} catch (err) {
 		console.log('err', err)
 	}
 }
 
+const getGeoJSONCountries = () => {
+	return countries.features.map(country => {
+		const countryGeoJSON = country
+
+		// fix Kosovo
+		if (countryGeoJSON.properties.ADMIN === 'Kosovo') {
+			countryGeoJSON.properties.ISO_A2 = 'XK'
+		}
+		// only take certain properties we'll need, from each country.
+		return {
+			name: countryGeoJSON.properties.ADMIN,
+			iso2: countryGeoJSON.properties.ISO_A2,
+			// iso3: countryGeoJSON.properties.ISO_A3,
+			multiPolygon: countryGeoJSON.geometry.coordinates
+		}
+	})
+}
+
 const getGeoJSONCountriesISOA2 = () => {
-	return countries.features.map(country => country.properties.ISO_A2)
+	return getGeoJSONCountries().map(country => country.iso2)
 }
 
 const getGeoJSONCountryByISOA2 = (ISOA2) => {
-	return countries.features.find(country => country.properties.ISO_A2 === ISOA2)
-}
-
-const getGeoJSONCountries = () => {
-	return countries
+	return getGeoJSONCountries().find(country => country.iso2 === ISOA2)
 }
 
 
 const randomPointsWithinGeoJSONCountry = (pointsRequested, countryPolygon) => {
 
-	// var multiGeometry = turf.multiPolygon(countryPolygon);
 	var points = randomPointsOnPolygon(pointsRequested, countryPolygon);
 	const latLonPoints = points.map(point => ({lat: point.geometry.coordinates[1], lng: point.geometry.coordinates[0]}))
 
@@ -50,6 +55,7 @@ const randomPointsWithinGeoJSONCountry = (pointsRequested, countryPolygon) => {
 }
 
 module.exports = {
+	getGeoJSONCountries,
 	getGeoJSONCountries,
 	getGeoJSONCountriesISOA2,
 	getGeoJSONCountryByISOA2,
