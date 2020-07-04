@@ -52,8 +52,6 @@
       return;
     }
 
-    var lastTick = new Date().getTime();
-
     var paused = false;
 
     // Pause playback and update the time display
@@ -68,27 +66,6 @@
           paused = false;
         })
     );
-
-    // The main playback loop; for each tick, we'll see how much
-    // time passed in our accelerated playback reel and find all
-    // the earthquakes that happened in that timespan, adding
-    // them to the globe with a color and angle relative to their magnitudes.
-    // d3.timer(
-    //   function () {
-    //     var now = new Date().getTime();
-
-    //     if (paused) {
-    //       lastTick = now;
-    //       return;
-    //     }
-
-    //     var realDelta = now - lastTick;
-
-    //     lastTick = now;
-    //   },
-    //   0,
-    //   1000
-    // );
 
     setInterval(function () {
       for (var countryCount = 0; countryCount < data.length; countryCount++) {
