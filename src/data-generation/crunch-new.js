@@ -1,6 +1,6 @@
 var fs = require("fs");
 
-const DataPointsUtil = require("./data-points-util");
+const DataPointsUtil = require("./util/data-points-util");
 
 const crunch = async () => {
   // get corona stats per country

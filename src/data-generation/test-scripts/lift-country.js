@@ -1,4 +1,4 @@
-const DataPointsUtil = require("./data-points-util");
+const DataPointsUtil = require("../util/data-points-util");
 var fs = require("fs");
 
 // load data file

@@ -3,7 +3,7 @@ var fs = require("fs");
 var randomPointsOnPolygon = require("random-points-on-polygon");
 var turf = require("turf");
 
-var countries = require("./countries.json");
+var countries = require("./../datasets/countries.json");
 
 const getStatsFromAPI = async () => {
   try {
