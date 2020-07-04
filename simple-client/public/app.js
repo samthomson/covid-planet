@@ -2,9 +2,9 @@
   var canvas = document.getElementById("quakeCanvas");
 
   const colours = {
-    land: "#f5f4f4",
-    borders: "#eceaea",
-    ocean: "#E3F2FD",
+    land: "#d1ccc0",
+    borders: "#84817a",
+    ocean: "#f7f1e3",
     confirmed: "#D50000",
     death: "black",
   };
