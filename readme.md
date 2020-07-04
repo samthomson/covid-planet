@@ -1,7 +1,10 @@
 # covid-planet
 
-A visualisation of the Covid-19 (Corona) virus. Specifically, visualising relative statistics (such as percent of population infected) and not just absolute figures.
+A realtime visualisation of the Covid-19 (Corona) virus; cases & deaths.
 
 ### todo
 
-- covid gif for favicon
+- add credits to readme
+- remove old react project
+- merge data gen with client
+- yarn script to crunch fresh data (expect to run via cron)
