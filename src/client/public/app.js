@@ -4,9 +4,9 @@
   canvas.height = document.body.clientHeight;
 
   const colours = {
-    land: "#d1ccc0",
-    borders: "#84817a",
-    ocean: "#f7f1e3",
+    land: "#D1D0CE",
+    borders: "#B6B6B4",
+    ocean: "#E5E4E2",
     confirmed: "red",
     death: "black",
   };
@@ -43,7 +43,7 @@
       },
     })
   );
-  planet.loadPlugin(autorotate(5));
+  // planet.loadPlugin(autorotate(5));
   planet.projection.rotate([100, -10, 0]);
   planet.draw(canvas);
 
