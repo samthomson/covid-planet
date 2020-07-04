@@ -1,22 +1,17 @@
-var randomPointsOnPolygon = require('random-points-on-polygon');
-var turf = require('turf');
 var fs = require('fs');
 
+const DataPointsUtil = require('./data-points-util')
 
-const countryGeoJson = require('./out/USA.json')
-const coords = countryGeoJson
+const countryGeoJSONInput = require('./out/FRA.json')
 
-var numberOfPoints = 100;
-
-var multiGeometry = turf.multiPolygon(coords);
-  
-
-var points = randomPointsOnPolygon(numberOfPoints, coords);
-
-const latLonPoints = points.map(point => ({lat: point.geometry.coordinates[1], lng: point.geometry.coordinates[0]}))
+const latLonPoints = DataPointsUtil.randomPointsWithinGeoJSONCountry(50, countryGeoJSONInput)
 
 console.log(JSON.stringify(latLonPoints, null, 4));
 
 fs.writeFile(`out/random-points.json`, JSON.stringify(latLonPoints), 'utf8', () => {
 	console.log('done')
 });
+
+
+
+// const testPoints = randomPointsWithinCountry(100, countryGeoJson)
