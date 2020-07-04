@@ -8,5 +8,8 @@
   "scripts": {
     "crunch-latest": "node ./src/data-generation/crunch-new.js",
     "start": "http-server ./src/client/public"
+  },
+  "resolutions": {
+    "ecstatic": "^4.1.2"
   }
 }
