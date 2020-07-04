@@ -12,6 +12,6 @@ Built using:
 
 ## todo
 
-- some description and numbers along with globe - also better positioning of the globe (use all space, and handle window resize)
-- segmented data for large countries (eg states in the US); us, brazil, russia, india.
 - filled circles not rings
+- segmented data for large countries (eg states in the US); us, brazil, russia, india.
+- github link

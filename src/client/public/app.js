@@ -1,11 +1,13 @@
 (function () {
   var canvas = document.getElementById("globeCanvas");
+  canvas.width = document.body.clientWidth;
+  canvas.height = document.body.clientHeight;
 
   const colours = {
     land: "#d1ccc0",
     borders: "#84817a",
     ocean: "#f7f1e3",
-    confirmed: "#D50000",
+    confirmed: "red",
     death: "black",
   };
   const baseTTL = 8000;
@@ -13,8 +15,8 @@
   // Create our Planetary.js planet and set some initial values;
   // we use several custom plugins, defined at the bottom of the file
   var planet = planetaryjs.planet();
-  planet.loadPlugin(autocenter({ extraHeight: -120 }));
-  planet.loadPlugin(autoscale({ extraHeight: -120 }));
+  planet.loadPlugin(autocenter());
+  planet.loadPlugin(autoscale());
   planet.loadPlugin(
     planetaryjs.plugins.earth({
       topojson: { file: "/world-110m.json" },
