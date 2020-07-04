@@ -1,5 +1,7 @@
 # covid-planet
 
+![covid-planet screenshot](./covid-planet.png)
+
 A realtime visualisation of the Covid-19 (Corona) virus; cases & deaths.
 
 Built using:
@@ -14,4 +16,3 @@ Built using:
 
 - filled circles not rings
 - segmented data for large countries (eg states in the US); us, brazil, russia, india.
-- github link
