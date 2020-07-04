@@ -17,7 +17,3 @@ const getStats = async (debug = false) => {
 }
 	
 getStats()
-
-// const uniqueGeoCountries = geoData.getCountriesISOA2()
-// console.log(uniqueGeoCountries)
-// console.log(uniqueGeoCountries.length)
