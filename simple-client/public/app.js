@@ -66,7 +66,7 @@
   //   time: timestamp_of_quake
   // }
   // The data is ordered, with the earliest data being the first in the file.
-  d3.json("/all-points.json", function (err, data) {
+  d3.json("/country-data.json", function (err, data) {
     if (err) {
       alert("Problem loading the quake data.");
       return;
@@ -166,15 +166,38 @@
     setInterval(function () {
       console.log("setInterval");
       const mag = 5;
-      for (var i = 0; i < data.length; i++) {
-        var ping = data[i];
-        planet.plugins.pings.add(ping.lng, ping.lat, {
-          // Here we use the `angles` and `colors` scales we built earlier
-          // to convert magnitudes to appropriate angles and colors.
-          angle: angles(mag),
-          color: colors(mag),
-          ttl: ttls(mag),
-        });
+      for (var countryCount = 0; countryCount < data.length; countryCount++) {
+        var countryData = data[countryCount];
+        const chance = Math.random();
+
+        const numberOfPointsAvailable = data[countryCount].points.length;
+        const randomPointIndice = Math.floor(
+          Math.random() * numberOfPointsAvailable
+        );
+
+        const randomLocation = data[countryCount].points[randomPointIndice];
+
+        if (chance < countryData.caseChancePerSecond) {
+          // add a new confirmed case
+          planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
+            // Here we use the `angles` and `colors` scales we built earlier
+            // to convert magnitudes to appropriate angles and colors.
+            angle: angles(mag),
+            color: colors(mag),
+            ttl: ttls(mag),
+          });
+        }
+
+        if (chance < countryData.deathChancePerSecond) {
+          // add a new confirmed case
+          planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
+            // Here we use the `angles` and `colors` scales we built earlier
+            // to convert magnitudes to appropriate angles and colors.
+            angle: angles(mag),
+            color: colors(mag),
+            ttl: ttls(mag),
+          });
+        }
       }
     }, 1000);
   });
