@@ -28,23 +28,68 @@ const crunch = async () => {
   }
 
   // for each covid country, generate a some points, and add along with a 24hour count to file
-  const countryGrouppedGeoPoints = coronaStatsCountries.map(
-    (coronaCountryCode) =>
-      DataPointsUtil.randomPointsWithinGeoJSONCountry(
-        2,
-        DataPointsUtil.getGeoJSONCountryByISOA2(coronaCountryCode).feature
-      )
-  );
+  const countryGrouppedGeoPoints = coronaStats.map((countryStats) => {
+    const { CountryCode, NewConfirmed, NewDeaths } = countryStats;
+
+    const pointsToAskFor = (() => {
+      if (NewConfirmed > 20000) {
+        return 200;
+      }
+      if (NewConfirmed > 10000) {
+        return 100;
+      }
+      if (NewConfirmed > 1000) {
+        return 20;
+      }
+      if (NewConfirmed > 100) {
+        return 10;
+      }
+      if (NewConfirmed > 10) {
+        return 4;
+      }
+      if (NewConfirmed > 0) {
+        return 2;
+      }
+      return 0;
+    })();
+
+    const pointsForCountry = DataPointsUtil.randomPointsWithinGeoJSONCountry(
+      pointsToAskFor,
+      DataPointsUtil.getGeoJSONCountryByISOA2(CountryCode).feature
+    );
+    const casesPerSecond = 86400 / NewConfirmed;
+    const deathPerSecond = 86400 / NewDeaths;
+
+    const caseChancePerSecond = Number((1 / casesPerSecond).toFixed(4));
+    const deathChancePerSecond = Number((1 / deathPerSecond).toFixed(4));
+
+    return {
+      country: CountryCode,
+      newConfirmed: NewConfirmed,
+      newDeaths: NewDeaths,
+      caseChancePerSecond,
+      deathChancePerSecond,
+      points: pointsForCountry,
+    };
+  });
 
   let allGeoPoints = [];
 
-  countryGrouppedGeoPoints.forEach((arrayOfPoints) => {
-    allGeoPoints = [...allGeoPoints, ...arrayOfPoints];
+  countryGrouppedGeoPoints.forEach((countryStats) => {
+    allGeoPoints = [...allGeoPoints, ...countryStats.points];
   });
 
   fs.writeFile(
     `out/all-points.json`,
-    JSON.stringify(allGeoPoints),
+    JSON.stringify(allGeoPoints, null, 4),
+    "utf8",
+    () => {
+      console.log("wrote a file to disk containing all geo points");
+    }
+  );
+  fs.writeFile(
+    `out/country-data.json`,
+    JSON.stringify(countryGrouppedGeoPoints, null, 4),
     "utf8",
     () => {
       console.log("wrote a file to disk containing all geo points");
