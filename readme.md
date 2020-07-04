@@ -14,6 +14,4 @@ Built using:
 
 - some description and numbers along with globe - also better positioning of the globe (use all space, and handle window resize)
 - segmented data for large countries (eg states in the US); us, brazil, russia, india.
-- favicon
 - filled circles not rings
-- add generic html head tags
