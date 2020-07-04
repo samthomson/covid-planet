@@ -2,11 +2,11 @@
   var canvas = document.getElementById("quakeCanvas");
 
   const colours = {
-    land: "#b8e994",
-    ocean: "#dff9fb",
-    confirmed: "#ff9f1a",
-    death: "#c23616",
-    borders: "#78e08f",
+    land: "#E8F5E9",
+    borders: "#C8E6C9",
+    ocean: "#E3F2FD",
+    confirmed: "#D50000",
+    death: "black",
   };
 
   // Create our Planetary.js planet and set some initial values;
@@ -72,26 +72,24 @@
     // time passed in our accelerated playback reel and find all
     // the earthquakes that happened in that timespan, adding
     // them to the globe with a color and angle relative to their magnitudes.
-    d3.timer(
-      function () {
-        var now = new Date().getTime();
+    // d3.timer(
+    //   function () {
+    //     var now = new Date().getTime();
 
-        if (paused) {
-          lastTick = now;
-          return;
-        }
+    //     if (paused) {
+    //       lastTick = now;
+    //       return;
+    //     }
 
-        var realDelta = now - lastTick;
+    //     var realDelta = now - lastTick;
 
-        lastTick = now;
-      },
-      0,
-      1000
-    );
+    //     lastTick = now;
+    //   },
+    //   0,
+    //   1000
+    // );
 
     setInterval(function () {
-      console.log("setInterval");
-      const mag = 5;
       for (var countryCount = 0; countryCount < data.length; countryCount++) {
         var countryData = data[countryCount];
         const chance = Math.random();
@@ -107,13 +105,15 @@
           // add a new death
           planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
             color: colours.death,
-            ttl: 40000,
+            ttl: 20000,
+            angle: Math.random() * 10,
           });
         } else if (chance < countryData.caseChancePerSecond) {
           // add a new confirmed case
           planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
             color: colours.confirmed,
-            ttl: 20000,
+            ttl: 10000,
+            angle: Math.random() * 10,
           });
         }
       }
