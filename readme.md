@@ -18,3 +18,4 @@ Built using:
 - segmented data for large countries (eg states in the US); us, brazil, russia, india.
 - favicon
 - filled circles not rings
+- add generic html head tags
