@@ -2,12 +2,13 @@
   var canvas = document.getElementById("quakeCanvas");
 
   const colours = {
-    land: "#E8F5E9",
-    borders: "#C8E6C9",
+    land: "#f5f4f4",
+    borders: "#eceaea",
     ocean: "#E3F2FD",
     confirmed: "#D50000",
     death: "black",
   };
+  const baseTTL = 8000;
 
   // Create our Planetary.js planet and set some initial values;
   // we use several custom plugins, defined at the bottom of the file
@@ -105,15 +106,15 @@
           // add a new death
           planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
             color: colours.death,
-            ttl: 20000,
-            angle: Math.random() * 10,
+            ttl: baseTTL * 2,
+            // angle: Math.random() * 10,
           });
         } else if (chance < countryData.caseChancePerSecond) {
           // add a new confirmed case
           planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
             color: colours.confirmed,
-            ttl: 10000,
-            angle: Math.random() * 10,
+            ttl: baseTTL,
+            // angle: Math.random() * 10,
           });
         }
       }
