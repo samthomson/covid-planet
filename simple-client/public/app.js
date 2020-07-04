@@ -103,19 +103,17 @@
 
         const randomLocation = data[countryCount].points[randomPointIndice];
 
-        if (chance < countryData.caseChancePerSecond) {
-          // add a new confirmed case
-          planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
-            color: colours.confirmed,
-            ttl: 20000,
-          });
-        }
-
         if (chance < countryData.deathChancePerSecond) {
           // add a new death
           planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
             color: colours.death,
             ttl: 40000,
+          });
+        } else if (chance < countryData.caseChancePerSecond) {
+          // add a new confirmed case
+          planet.plugins.pings.add(randomLocation.lng, randomLocation.lat, {
+            color: colours.confirmed,
+            ttl: 20000,
           });
         }
       }
