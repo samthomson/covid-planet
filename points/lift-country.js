@@ -4,7 +4,7 @@ const DataPointsUtil = require('./data-points-util')
 var fs = require('fs');
 
 // load data file
-const countryNameISO2 = 'FR'
+const countryNameISO2 = 'RU'
 
 // const countries = DataPointsUtil.getGeoJSONCountries()
 // const uniqueCountries = countries.features.map(country => ({

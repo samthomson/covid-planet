@@ -2,7 +2,7 @@ var fs = require('fs');
 
 const DataPointsUtil = require('./data-points-util')
 
-const countryGeoJSONInput = require('./out/FRA.json')
+const countryGeoJSONInput = require('./out/RUS.json')
 
 const latLonPoints = DataPointsUtil.randomPointsWithinGeoJSONCountry(50, countryGeoJSONInput)
 
