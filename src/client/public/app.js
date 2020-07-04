@@ -1,5 +1,5 @@
 (function () {
-  var canvas = document.getElementById("quakeCanvas");
+  var canvas = document.getElementById("globeCanvas");
 
   const colours = {
     land: "#d1ccc0",
