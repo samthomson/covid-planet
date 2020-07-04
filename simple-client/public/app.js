@@ -44,29 +44,6 @@
   planet.projection.rotate([100, -10, 0]);
   planet.draw(canvas);
 
-  // Create a color scale for the various earthquake magnitudes; the
-  // minimum magnitude in our data set is 2.5.
-  var colors = d3.scale
-    .pow()
-    .exponent(3)
-    .domain([2, 4, 6, 8, 10])
-    .range(["white", "yellow", "orange", "red", "purple"]);
-  // Also create a scale for mapping magnitudes to ping angle sizes
-  var angles = d3.scale.pow().exponent(3).domain([2.5, 10]).range([0.5, 15]);
-  // And finally, a scale for mapping magnitudes to ping TTLs
-  var ttls = d3.scale.pow().exponent(3).domain([2.5, 10]).range([2000, 5000]);
-
-  // Create a key to show the magnitudes and their colors
-  d3.select("#magnitudes")
-    .selectAll("li")
-    .data(colors.ticks(9))
-    .enter()
-    .append("li")
-    .style("color", colors)
-    .text(function (d) {
-      return "Magnitude " + d;
-    });
-
   // Load our geo corona data in.
   d3.json("/country-data.json", function (err, data) {
     if (err) {
