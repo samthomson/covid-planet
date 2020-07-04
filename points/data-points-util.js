@@ -43,10 +43,14 @@ const getGeoJSONCountryByISOA2 = (ISOA2) => {
 };
 
 const randomPointsWithinGeoJSONCountry = (pointsRequested, countryPolygon) => {
+  if (pointsRequested === 0) {
+    return [];
+  }
   var points = randomPointsOnPolygon(pointsRequested, countryPolygon);
+
   const latLonPoints = points.map((point) => ({
-    lat: point.geometry.coordinates[1],
-    lng: point.geometry.coordinates[0],
+    lat: Number(point.geometry.coordinates[1].toFixed(3)),
+    lng: Number(point.geometry.coordinates[0].toFixed(3)),
   }));
 
   return latLonPoints;
