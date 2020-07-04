@@ -12,8 +12,6 @@ Built using:
 
 ## todo
 
-- merge data gen with client
-- yarn script to crunch fresh data (expect to run via cron)
 - some description and numbers along with globe - also better positioning of the globe (use all space, and handle window resize)
 - segmented data for large countries (eg states in the US); us, brazil, russia, india.
 - favicon
