@@ -73,20 +73,6 @@ const crunch = async () => {
     };
   });
 
-  let allGeoPoints = [];
-
-  countryGrouppedGeoPoints.forEach((countryStats) => {
-    allGeoPoints = [...allGeoPoints, ...countryStats.points];
-  });
-
-  fs.writeFile(
-    `out/all-points.json`,
-    JSON.stringify(allGeoPoints, null, 4),
-    "utf8",
-    () => {
-      console.log("wrote a file to disk containing all geo points");
-    }
-  );
   fs.writeFile(
     `out/country-data.json`,
     JSON.stringify(countryGrouppedGeoPoints, null, 4),
