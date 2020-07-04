@@ -4,5 +4,8 @@
     "geojson-random": "^0.5.0",
     "random-points-on-polygon": "^0.0.4",
     "turf": "^3.0.14"
+  },
+  "scripts": {
+    "crunch-latest": "node ./crunch-new.js"
   }
 }
