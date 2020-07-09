@@ -1,0 +1,11 @@
+version: "2"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn run start
+    ports:
+      - "8888:8080"
+    volumes:
+      - ./:/covid-planet
