@@ -1,15 +1,12 @@
 {
   "dependencies": {
     "axios": "^0.19.2",
-    "http-server": "^0.12.3",
     "random-points-on-polygon": "^0.0.4",
+    "serve": "^11.3.2",
     "turf": "^3.0.14"
   },
   "scripts": {
     "crunch-latest": "node ./src/data-generation/crunch-new.js",
-    "start": "http-server ./src/client/public"
-  },
-  "resolutions": {
-    "ecstatic": "^4.1.2"
+    "start": "serve ./src/public -p 8080"
   }
 }
