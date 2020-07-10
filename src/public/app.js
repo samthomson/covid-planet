@@ -50,7 +50,7 @@
   // Load our geo corona data in.
   d3.json("/country-data.json", function (err, data) {
     if (err) {
-      alert("Problem loading the quake data.");
+      console.error("Problem loading data.");
       return;
     }
 
