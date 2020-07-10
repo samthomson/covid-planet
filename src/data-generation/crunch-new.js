@@ -74,11 +74,14 @@ const crunch = async () => {
   });
 
   fs.writeFile(
-    `out/country-data.json`,
+    `/app/src/public/data/country-data.json`,
     JSON.stringify(countryGrouppedGeoPoints, null, 4),
     "utf8",
-    () => {
+    (err) => {
       console.log("wrote a file to disk containing all geo points");
+      if (err) {
+        console.error("problem writing file to disk", err);
+      }
     }
   );
 };
