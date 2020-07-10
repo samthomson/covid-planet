@@ -2,7 +2,7 @@ FROM mhart/alpine-node
 
 WORKDIR /app
 
-EXPOSE 8080
+EXPOSE 8888
 
 ADD ./ /app
 

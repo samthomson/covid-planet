@@ -6,6 +6,6 @@ services:
       dockerfile: ./Dockerfile
     command: yarn run start
     ports:
-      - "8888:8080"
+      - "8888:8888"
     volumes:
       - ./:/app
