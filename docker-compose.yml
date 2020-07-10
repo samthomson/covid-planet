@@ -8,4 +8,4 @@ services:
     ports:
       - "8888:8080"
     volumes:
-      - ./:/covid-planet
+      - ./:/app
