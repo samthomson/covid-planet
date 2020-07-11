@@ -17,3 +17,4 @@ Built using:
 - deployment process, with regeneration of data
 - filled circles not rings
 - segmented data for large countries (eg states in the US); us, brazil, russia, india.
+- analytics
