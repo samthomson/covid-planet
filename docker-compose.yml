@@ -7,6 +7,6 @@ services:
     command: [sh, -c, "yarn --silent && yarn run start"]
     ports:
       - "80:8888"
-      - "81:8888"
+      - "443:8888"
     volumes:
       - ./:/app
