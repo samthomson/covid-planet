@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: yarn run start
+    command: yarn --silent && yarn run start
     ports:
       - "80:8888"
       - "81:8888"
