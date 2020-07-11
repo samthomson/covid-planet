@@ -1,2 +1,3 @@
 node_modules
-points/out
+src/public/data
+.env
