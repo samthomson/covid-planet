@@ -2,9 +2,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.17.1",
-    "express-static": "^1.2.6",
     "random-points-on-polygon": "^0.0.4",
-    "serve": "^11.3.2",
     "turf": "^3.0.14"
   },
   "scripts": {
