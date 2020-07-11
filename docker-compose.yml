@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: [sh, -c, "yarn --silent && yarn run start & npm run forever"]
+    command: [sh, -c, "yarn --silent & npm run forever && yarn run start"]
     ports:
       - "80:8888"
       - "443:8888"
