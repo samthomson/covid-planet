@@ -1,6 +1,6 @@
 var fs = require("fs");
 
-const DataPointsUtil = require("./util/data-points-util");
+const DataPointsUtil = require("./data-points-util");
 
 const crunch = async () => {
   // get corona stats per country
@@ -73,8 +73,13 @@ const crunch = async () => {
     };
   });
 
+  const dirname = "/app/src/public/data";
+  if (!fs.existsSync(dirname)) {
+    fs.mkdirSync(dirname);
+  }
+
   fs.writeFile(
-    `/app/src/public/data/country-data.json`,
+    `${dirname}/country-data.json`,
     JSON.stringify(countryGrouppedGeoPoints, null, 4),
     "utf8",
     (err) => {
@@ -86,4 +91,6 @@ const crunch = async () => {
   );
 };
 
-crunch();
+module.exports = {
+  crunch,
+};

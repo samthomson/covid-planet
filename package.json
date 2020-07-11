@@ -1,12 +1,15 @@
 {
   "dependencies": {
     "axios": "^0.19.2",
+    "cron": "^1.8.2",
     "express": "^4.17.1",
+    "forever": "^3.0.0",
     "random-points-on-polygon": "^0.0.4",
     "turf": "^3.0.14"
   },
   "scripts": {
-    "crunch-latest": "node ./src/data-generation/crunch-new.js",
-    "start": "node ./src/server.js"
+    "crunch-latest": "node ./src/data-generation/manually-crunch-new.js",
+    "start": "node ./src/server.js",
+    "forever": "forever start ./src/pseudo-cron.js"
   }
 }
