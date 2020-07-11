@@ -3,4 +3,6 @@
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 source $SCRIPTPATH/.env
 
-docker-machine ssh $DOCKER_HOST "cd /covid-planet && bash pull-latest-and-restart-containers.sh"
+echo "we'll redeploy to our docker-machine host: $DOCKER_MACHINE_NAME"
+
+docker-machine ssh $DOCKER_MACHINE_NAME "cd /covid-planet && bash pull-latest-and-restart-containers.sh"
