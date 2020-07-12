@@ -48,11 +48,12 @@
   planet.draw(canvas);
 
   // Load our geo corona data in.
-  d3.json("/data/country-data.json", function (err, data) {
+  d3.json("/data/country-data.json", function (err, countryData) {
     if (err) {
       console.error("Problem loading data.");
       return;
     }
+    const data = countryData.data;
 
     var paused = false;
 
