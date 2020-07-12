@@ -78,9 +78,16 @@ const crunch = async () => {
     fs.mkdirSync(dirname);
   }
 
+  const countryData = {
+    meta: {
+      crunchedAt: new Date().toISOString(),
+    },
+    data: countryGrouppedGeoPoints,
+  };
+
   fs.writeFile(
     `${dirname}/country-data.json`,
-    JSON.stringify(countryGrouppedGeoPoints, null, 4),
+    JSON.stringify(countryData, null, 4),
     "utf8",
     (err) => {
       console.log("wrote a file to disk containing all geo points");
