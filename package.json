@@ -11,6 +11,6 @@
     "crunch-latest": "node ./src/data-generation/manually-crunch-new.js",
     "start": "node ./src/server.js",
     "forever": "forever start ./src/pseudo-cron.js",
-    "install-start": "yarn --silent && yarn run start"
+    "install-start": "yarn --silent && yarn run crunch-latest && yarn run start"
   }
 }
