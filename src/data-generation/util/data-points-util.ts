@@ -65,7 +65,7 @@ export const getCountryCoronaData = async () => {
 };
 
 export const getGeoJSONRegions = () => {
-  return countries.features.map((country) => {
+  const sanitisedCountries = countries.features.map((country) => {
     const countryGeoJSON = country;
 
     // fix Kosovo
@@ -75,19 +75,21 @@ export const getGeoJSONRegions = () => {
     // only take certain properties we'll need, from each country.
     return {
       name: countryGeoJSON.properties.ADMIN,
-      iso2: countryGeoJSON.properties.ISO_A2,
+      regionCode: countryGeoJSON.properties.ISO_A2, // iso2
       // iso3: countryGeoJSON.properties.ISO_A3,
       feature: countryGeoJSON,
     };
   });
+
+  return [...sanitisedCountries];
 };
 
-export const getGeoJSONCountriesISOA2 = () => {
-  return getGeoJSONRegions().map((country) => country.iso2);
+export const getGeoJSONRegionCodes = () => {
+  return getGeoJSONRegions().map((country) => country.regionCode);
 };
 
-export const getGeoJSONCountryByISOA2 = (ISOA2) => {
-  return getGeoJSONRegions().find((country) => country.iso2 === ISOA2);
+export const getGeoJSONCountryByRegion = (ISOA2) => {
+  return getGeoJSONRegions().find((country) => country.regionCode === ISOA2);
 };
 
 export const randomPointsWithinGeoJSONCountry = (

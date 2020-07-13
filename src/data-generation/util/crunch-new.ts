@@ -7,11 +7,11 @@ export const crunch = async () => {
   const coronaStats = await DataPointsUtil.getStatsFromAPI();
 
   // check we have geo data for all corona country data
-  const coronaStatsCountries = coronaStats.map((stat) => stat.CountryCode);
-  const uniqueGeoCountries = DataPointsUtil.getGeoJSONCountriesISOA2();
+  const coronaStatsCountries = coronaStats.map((stat) => stat.region);
+  const uniqueGeoRegions = DataPointsUtil.getGeoJSONRegionCodes();
   const missing = [];
   coronaStatsCountries.forEach((coronaResult) => {
-    if (!uniqueGeoCountries.includes(coronaResult)) {
+    if (!uniqueGeoRegions.includes(coronaResult)) {
       missing.push(coronaResult);
     }
   });
@@ -29,44 +29,47 @@ export const crunch = async () => {
 
   // for each covid country, generate a some points, and add along with a 24hour count to file
   const countryGrouppedGeoPoints = coronaStats.map((countryStats) => {
-    const { CountryCode, NewConfirmed, NewDeaths } = countryStats;
+    const { region, cases, deaths } = countryStats;
 
     const pointsToAskFor = (() => {
-      if (NewConfirmed > 20000) {
+      if (cases > 20000) {
         return 200;
       }
-      if (NewConfirmed > 10000) {
+      if (cases > 10000) {
         return 100;
       }
-      if (NewConfirmed > 1000) {
+      if (cases > 1000) {
         return 20;
       }
-      if (NewConfirmed > 100) {
+      if (cases > 100) {
         return 10;
       }
-      if (NewConfirmed > 10) {
+      if (cases > 10) {
         return 4;
       }
-      if (NewConfirmed > 0) {
+      if (cases > 0) {
         return 2;
       }
       return 0;
     })();
 
-    const pointsForCountry = DataPointsUtil.randomPointsWithinGeoJSONCountry(
-      pointsToAskFor,
-      DataPointsUtil.getGeoJSONCountryByISOA2(CountryCode).feature
-    );
-    const casesPerSecond = 86400 / NewConfirmed;
-    const deathPerSecond = 86400 / NewDeaths;
+    const geoJSONForRegion = DataPointsUtil.getGeoJSONCountryByRegion(region);
+    const pointsForCountry = geoJSONForRegion
+      ? DataPointsUtil.randomPointsWithinGeoJSONCountry(
+          pointsToAskFor,
+          geoJSONForRegion.feature
+        )
+      : [];
+    const casesPerSecond = 86400 / cases;
+    const deathPerSecond = 86400 / deaths;
 
     const caseChancePerSecond = Number((1 / casesPerSecond).toFixed(4));
     const deathChancePerSecond = Number((1 / deathPerSecond).toFixed(4));
 
     return {
-      country: CountryCode,
-      newConfirmed: NewConfirmed,
-      newDeaths: NewDeaths,
+      country: region,
+      newConfirmed: cases,
+      newDeaths: deaths,
       caseChancePerSecond,
       deathChancePerSecond,
       points: pointsForCountry,
