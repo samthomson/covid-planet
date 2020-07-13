@@ -11,10 +11,13 @@
     "typescript": "^3.9.6"
   },
   "scripts": {
-    "crunch-latest": "node -r esm ./src/data-generation/manually-crunch-new.js",
+    "crunch-latest": "ts-node ./src/data-generation/manually-crunch-new.ts",
     "start": "node ./src/server.js",
     "forever": "forever start ./src/pseudo-cron.js",
     "install-start": "yarn --silent && yarn run crunch-latest && yarn run start",
     "states": "ts-node ./src/data-generation/usStates.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.23"
   }
 }

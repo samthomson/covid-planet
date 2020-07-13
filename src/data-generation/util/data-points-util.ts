@@ -1,7 +1,7 @@
 import axios from "axios";
-import randomPointsOnPolygon from "random-points-on-polygon";
+import * as randomPointsOnPolygon from "random-points-on-polygon";
 
-import * as countries from "./../datasets/countries.json";
+import * as countries from "../datasets/countries.json";
 
 export const getStatsFromAPI = async () => {
   try {
