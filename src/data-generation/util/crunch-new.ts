@@ -33,10 +33,10 @@ export const crunch = async () => {
 
     const pointsToAskFor = (() => {
       if (cases > 20000) {
-        return 200;
+        return 40;
       }
       if (cases > 10000) {
-        return 100;
+        return 30;
       }
       if (cases > 1000) {
         return 20;
