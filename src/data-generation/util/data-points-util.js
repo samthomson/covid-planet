@@ -3,7 +3,7 @@ import randomPointsOnPolygon from "random-points-on-polygon";
 
 import * as countries from "./../datasets/countries.json";
 
-const getStatsFromAPI = async () => {
+export const getStatsFromAPI = async () => {
   try {
     const summaryResp = await axios.get("https://api.covid19api.com/summary");
 
@@ -14,7 +14,7 @@ const getStatsFromAPI = async () => {
   }
 };
 
-const getGeoJSONRegions = () => {
+export const getGeoJSONRegions = () => {
   return countries.features.map((country) => {
     const countryGeoJSON = country;
 
@@ -32,15 +32,18 @@ const getGeoJSONRegions = () => {
   });
 };
 
-const getGeoJSONCountriesISOA2 = () => {
+export const getGeoJSONCountriesISOA2 = () => {
   return getGeoJSONRegions().map((country) => country.iso2);
 };
 
-const getGeoJSONCountryByISOA2 = (ISOA2) => {
+export const getGeoJSONCountryByISOA2 = (ISOA2) => {
   return getGeoJSONRegions().find((country) => country.iso2 === ISOA2);
 };
 
-const randomPointsWithinGeoJSONCountry = (pointsRequested, countryPolygon) => {
+export const randomPointsWithinGeoJSONCountry = (
+  pointsRequested,
+  countryPolygon
+) => {
   if (pointsRequested === 0) {
     return [];
   }
@@ -52,12 +55,4 @@ const randomPointsWithinGeoJSONCountry = (pointsRequested, countryPolygon) => {
   }));
 
   return latLonPoints;
-};
-
-module.exports = {
-  getGeoJSONRegions,
-  getGeoJSONCountriesISOA2,
-  getGeoJSONCountryByISOA2,
-  getStatsFromAPI,
-  randomPointsWithinGeoJSONCountry,
 };
