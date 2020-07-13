@@ -5,12 +5,15 @@
     "express": "^4.17.1",
     "forever": "^3.0.0",
     "random-points-on-polygon": "^0.0.4",
-    "turf": "^3.0.14"
+    "ts-node": "^8.10.2",
+    "turf": "^3.0.14",
+    "typescript": "^3.9.6"
   },
   "scripts": {
     "crunch-latest": "node ./src/data-generation/manually-crunch-new.js",
     "start": "node ./src/server.js",
     "forever": "forever start ./src/pseudo-cron.js",
-    "install-start": "yarn --silent && yarn run crunch-latest && yarn run start"
+    "install-start": "yarn --silent && yarn run crunch-latest && yarn run start",
+    "states": "ts-node ./src/data-generation/usStates.ts"
   }
 }
