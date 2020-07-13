@@ -19,7 +19,7 @@ const requestUSStateData = async (): Promise<[]> => {
       newDeaths: state.deathIncrease,
     }));
     // console.log(filteredStateData);
-    return validUSStatesOnly;
+    return filteredStateData;
   } catch {
     return [];
   }
