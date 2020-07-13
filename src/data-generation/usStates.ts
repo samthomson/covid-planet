@@ -1,32 +1,23 @@
-import axios from "axios";
+import * as fs from "fs";
 
-import * as validUSStates from "./datasets/validUSStates.json";
+import { requestUSStateData, getStatsFromAPI } from "./util/data-points-util";
 
-const requestUSStateData = async (): Promise<[]> => {
-  try {
-    const usStatesResponse = await axios.get(
-      "https://covid19api.io/api/v1/UnitedStateCasesByStates"
-    );
-    const statesCoronaData = usStatesResponse.data.data[0].table;
-    const validStateCodes = getValidUSStateCodes();
+// requestUSStateData();
 
-    const validUSStatesOnly = statesCoronaData.filter((prospectiveState) =>
-      validStateCodes.includes(prospectiveState.state)
-    );
-    const filteredStateData = validUSStatesOnly.map((state) => ({
-      state: state.state,
-      newCases: state.positiveIncrease,
-      newDeaths: state.deathIncrease,
-    }));
-    // console.log(filteredStateData);
-    return filteredStateData;
-  } catch {
-    return [];
-  }
+const test = async () => {
+  const mixedData = await getStatsFromAPI();
+
+  fs.writeFile(
+    `mixed-test.json`,
+    JSON.stringify(mixedData, null, 4),
+    "utf8",
+    (err) => {
+      console.log("wrote a file to disk containing all mixed data");
+      if (err) {
+        console.error("problem writing file to disk", err);
+      }
+    }
+  );
 };
 
-const getValidUSStateCodes = (): string[] => {
-  return validUSStates.map((state) => state["alpha-2"]);
-};
-
-requestUSStateData();
+test();
