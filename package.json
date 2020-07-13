@@ -2,6 +2,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cron": "^1.8.2",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "forever": "^3.0.0",
     "random-points-on-polygon": "^0.0.4",
@@ -10,7 +11,7 @@
     "typescript": "^3.9.6"
   },
   "scripts": {
-    "crunch-latest": "node ./src/data-generation/manually-crunch-new.js",
+    "crunch-latest": "node -r esm ./src/data-generation/manually-crunch-new.js",
     "start": "node ./src/server.js",
     "forever": "forever start ./src/pseudo-cron.js",
     "install-start": "yarn --silent && yarn run crunch-latest && yarn run start",

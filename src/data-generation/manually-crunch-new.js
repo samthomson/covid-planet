@@ -1,3 +1,3 @@
-const crunch = require("./util/crunch-new").crunch;
+import { crunch } from "./util/crunch-new";
 
 crunch();
