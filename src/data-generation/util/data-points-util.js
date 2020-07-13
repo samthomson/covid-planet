@@ -1,9 +1,7 @@
-const axios = require("axios").default;
-var fs = require("fs");
-var randomPointsOnPolygon = require("random-points-on-polygon");
-var turf = require("turf");
+import axios from "axios";
+import randomPointsOnPolygon from "random-points-on-polygon";
 
-var countries = require("./../datasets/countries.json");
+import * as countries from "./../datasets/countries.json";
 
 const getStatsFromAPI = async () => {
   try {

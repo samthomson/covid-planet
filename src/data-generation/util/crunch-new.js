@@ -1,8 +1,8 @@
-var fs = require("fs");
+import * as fs from "fs";
 
-const DataPointsUtil = require("./data-points-util");
+import * as DataPointsUtil from "./data-points-util";
 
-const crunch = async () => {
+export const crunch = async () => {
   // get corona stats per country
   const coronaStats = await DataPointsUtil.getStatsFromAPI();
 
@@ -96,8 +96,4 @@ const crunch = async () => {
       }
     }
   );
-};
-
-module.exports = {
-  crunch,
 };
