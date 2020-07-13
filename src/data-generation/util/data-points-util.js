@@ -16,7 +16,7 @@ const getStatsFromAPI = async () => {
   }
 };
 
-const getGeoJSONCountries = () => {
+const getGeoJSONRegions = () => {
   return countries.features.map((country) => {
     const countryGeoJSON = country;
 
@@ -35,11 +35,11 @@ const getGeoJSONCountries = () => {
 };
 
 const getGeoJSONCountriesISOA2 = () => {
-  return getGeoJSONCountries().map((country) => country.iso2);
+  return getGeoJSONRegions().map((country) => country.iso2);
 };
 
 const getGeoJSONCountryByISOA2 = (ISOA2) => {
-  return getGeoJSONCountries().find((country) => country.iso2 === ISOA2);
+  return getGeoJSONRegions().find((country) => country.iso2 === ISOA2);
 };
 
 const randomPointsWithinGeoJSONCountry = (pointsRequested, countryPolygon) => {
@@ -57,8 +57,7 @@ const randomPointsWithinGeoJSONCountry = (pointsRequested, countryPolygon) => {
 };
 
 module.exports = {
-  getGeoJSONCountries,
-  getGeoJSONCountries,
+  getGeoJSONRegions,
   getGeoJSONCountriesISOA2,
   getGeoJSONCountryByISOA2,
   getStatsFromAPI,
