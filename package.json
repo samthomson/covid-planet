@@ -12,7 +12,7 @@
   },
   "scripts": {
     "generate-geojsons": "ts-node ./src/data-generation/generate-geojsons.ts",
-    "crunch-latest": "ts-node ./src/data-generation/manually-crunch-new.ts",
+    "crunch-latest": "node -r ts-node/register --max-old-space-size=1024 ./src/data-generation/manually-crunch-new.ts",
     "start": "node ./src/server.js",
     "forever": "forever start ./src/pseudo-cron.js",
     "install-start": "yarn --silent && yarn run crunch-latest && yarn run start",
