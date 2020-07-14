@@ -1,15 +1,12 @@
 import * as fs from "fs";
 
-import {
-  requestUSStateData,
-  getStatsFromAPI,
-  getGeoJSONUSStates,
-} from "./util/data-points-util";
+import * as GeoJSONUtil from "./util/geoJSON";
+import * as CoronaDataUtil from "./util/corona-data";
 
 // requestUSStateData();
 
 const test = async () => {
-  const mixedData = await getStatsFromAPI();
+  const mixedData = await CoronaDataUtil.getStatsFromAPI();
 
   fs.writeFile(
     `mixed-test.json`,
@@ -25,4 +22,4 @@ const test = async () => {
 };
 
 // test();
-getGeoJSONUSStates();
+GeoJSONUtil.getGeoJSONUSStates();

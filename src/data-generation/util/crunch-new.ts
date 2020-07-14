@@ -1,14 +1,15 @@
 import * as fs from "fs";
 
-import * as DataPointsUtil from "./data-points-util";
+import * as GeoJSONUtil from "./geoJSON";
+import * as CoronaDataUtil from "./corona-data";
 
 export const crunch = async () => {
   // get corona stats per country
-  const coronaStats = await DataPointsUtil.getStatsFromAPI();
+  const coronaStats = await CoronaDataUtil.getStatsFromAPI();
 
   // check we have geo data for all corona country data
   const coronaStatsCountries = coronaStats.map((stat) => stat.region);
-  const uniqueGeoRegions = DataPointsUtil.getGeoJSONRegionCodes();
+  const uniqueGeoRegions = GeoJSONUtil.getGeoJSONRegionCodes();
   const missing = [];
   coronaStatsCountries.forEach((coronaResult) => {
     if (!uniqueGeoRegions.includes(coronaResult)) {
@@ -53,9 +54,9 @@ export const crunch = async () => {
       return 0;
     })();
 
-    const geoJSONForRegion = DataPointsUtil.getGeoJSONCountryByRegion(region);
+    const geoJSONForRegion = GeoJSONUtil.getGeoJSONCountryByRegion(region);
     const pointsForCountry = geoJSONForRegion
-      ? DataPointsUtil.randomPointsWithinGeoJSONCountry(
+      ? GeoJSONUtil.randomPointsWithinGeoJSONCountry(
           pointsToAskFor,
           geoJSONForRegion.feature
         )
