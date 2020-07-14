@@ -47,13 +47,19 @@ export const getGeoJSONRegions = () => {
 };
 
 export const getGeoJSONRegionCodes = () => {
-  return getGeoJSONRegions().map((region) => region.regionCode);
+  const geoJSONDir = `./src/data-generation/datasets/geoJSONRegions`;
+  const filenames = fs.readdirSync(geoJSONDir);
+  const countryCodes = filenames.map((file) => file.split(".")[0]);
+
+  return countryCodes;
 };
 
 export const getGeoJSONCountryByRegion = (regionCode) => {
-  return getGeoJSONRegions().find(
-    (country) => country.regionCode === regionCode
-  );
+  const path = `./src/data-generation/datasets/geoJSONRegions/${regionCode}.geojson`;
+
+  const geoJSON = JSON.parse(fs.readFileSync(path, "utf8"));
+
+  return geoJSON;
 };
 
 export const randomPointsWithinGeoJSONCountry = (

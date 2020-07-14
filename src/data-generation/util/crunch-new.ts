@@ -58,7 +58,7 @@ export const crunch = async () => {
     const pointsForCountry = geoJSONForRegion
       ? GeoJSONUtil.randomPointsWithinGeoJSONCountry(
           pointsToAskFor,
-          geoJSONForRegion.feature
+          geoJSONForRegion
         )
       : [];
     const casesPerSecond = 86400 / cases;
