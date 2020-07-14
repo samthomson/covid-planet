@@ -94,6 +94,10 @@ export const crunch = async () => {
     "utf8",
     (err) => {
       console.log("wrote a file to disk containing all geo points");
+      const used = process.memoryUsage().heapUsed / 1024 / 1024;
+      console.log(
+        `The script uses approximately ${Math.round(used * 100) / 100} MB`
+      );
       if (err) {
         console.error("problem writing file to disk", err);
       }
