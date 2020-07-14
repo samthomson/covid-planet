@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as fs from "fs";
 import * as randomPointsOnPolygon from "random-points-on-polygon";
 
 import * as countries from "../datasets/countries.json";
@@ -20,7 +21,6 @@ export const requestUSStateData = async (): Promise<[]> => {
       cases: state.positiveIncrease,
       deaths: state.deathIncrease,
     }));
-    // console.log(filteredStateData);
     return filteredStateData;
   } catch {
     return [];
@@ -64,7 +64,23 @@ export const getCountryCoronaData = async () => {
   }
 };
 
-export const getGeoJSONRegions = () => {
+export const getGeoJSONUSStates = () => {
+  const dataDir = "./src/data-generation/datasets/us-states-geojson";
+  const filenames = fs.readdirSync(dataDir);
+  const geoJSON = filenames.map((path) =>
+    JSON.parse(fs.readFileSync(dataDir + "/" + path, "utf8"))
+  );
+
+  const sanitised = geoJSON.map((state) => ({
+    name: state.properties.name,
+    regionCode: "US_" + state.properties.abbreviation,
+    feature: state,
+  }));
+
+  return sanitised;
+};
+
+export const getGeoJSONCountries = () => {
   const sanitisedCountries = countries.features.map((country) => {
     const countryGeoJSON = country;
 
@@ -81,7 +97,14 @@ export const getGeoJSONRegions = () => {
     };
   });
 
-  return [...sanitisedCountries];
+  return sanitisedCountries;
+};
+
+export const getGeoJSONRegions = () => {
+  const sanitisedCountries = getGeoJSONCountries();
+  const USStates = getGeoJSONUSStates();
+
+  return [...sanitisedCountries, ...USStates];
 };
 
 export const getGeoJSONRegionCodes = () => {
@@ -99,7 +122,7 @@ export const randomPointsWithinGeoJSONCountry = (
   if (pointsRequested === 0) {
     return [];
   }
-  var points = randomPointsOnPolygon(pointsRequested, countryPolygon);
+  var points = randomPointsOnPolygon(pointsRequested, countryPolygon) ?? [];
 
   const latLonPoints = points.map((point) => ({
     lat: Number(point.geometry.coordinates[1].toFixed(3)),

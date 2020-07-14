@@ -18,12 +18,12 @@ export const crunch = async () => {
   if (missing.length > 0) {
     console.error(
       missing.length,
-      "covid data countries with missing geodata: ",
+      "covid data regions with missing geodata: ",
       missing.join(",")
     );
   } else {
     console.log(
-      `got covid data for ${coronaStatsCountries.length} countries. All of which have geo data.`
+      `got covid data for ${coronaStatsCountries.length} regions. All of which have geo data.`
     );
   }
 
