@@ -1,6 +1,10 @@
 import * as fs from "fs";
 
-import { requestUSStateData, getStatsFromAPI } from "./util/data-points-util";
+import {
+  requestUSStateData,
+  getStatsFromAPI,
+  getGeoJSONUSStates,
+} from "./util/data-points-util";
 
 // requestUSStateData();
 
@@ -20,4 +24,5 @@ const test = async () => {
   );
 };
 
-test();
+// test();
+getGeoJSONUSStates();
