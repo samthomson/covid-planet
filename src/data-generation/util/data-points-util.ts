@@ -108,11 +108,13 @@ export const getGeoJSONRegions = () => {
 };
 
 export const getGeoJSONRegionCodes = () => {
-  return getGeoJSONRegions().map((country) => country.regionCode);
+  return getGeoJSONRegions().map((region) => region.regionCode);
 };
 
-export const getGeoJSONCountryByRegion = (ISOA2) => {
-  return getGeoJSONRegions().find((country) => country.regionCode === ISOA2);
+export const getGeoJSONCountryByRegion = (regionCode) => {
+  return getGeoJSONRegions().find(
+    (country) => country.regionCode === regionCode
+  );
 };
 
 export const randomPointsWithinGeoJSONCountry = (
