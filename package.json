@@ -11,6 +11,7 @@
     "typescript": "^3.9.6"
   },
   "scripts": {
+    "generate-geojsons": "ts-node ./src/data-generation/generate-geojsons.ts",
     "crunch-latest": "ts-node ./src/data-generation/manually-crunch-new.ts",
     "start": "node ./src/server.js",
     "forever": "forever start ./src/pseudo-cron.js",
