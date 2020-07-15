@@ -6,13 +6,13 @@ const generate = () => {
   let regions = GeoJSONUtil.getGeoJSONRegions();
 
   // generate points within
-  const regionalPoints = regions.map((regionGeoJSON) => {
+  let pointsObject = {};
+  regions.forEach((regionGeoJSON) => {
     const { feature, regionCode } = regionGeoJSON;
     // get points
     const points = GeoJSONUtil.randomPointsWithinGeoJSONCountry(20, feature);
 
-    return {
-      regionCode,
+    pointsObject[regionCode] = {
       points,
     };
   });
@@ -20,7 +20,7 @@ const generate = () => {
   // store as json
   fs.writeFile(
     `regional-points.json`,
-    JSON.stringify(regionalPoints, null, 4),
+    JSON.stringify(pointsObject, null, 4),
     "utf8",
     (err) => {
       console.log("wrote a file to disk containing regional points");
