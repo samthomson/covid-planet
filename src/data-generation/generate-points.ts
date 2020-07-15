@@ -19,7 +19,7 @@ const generate = () => {
 
   // store as json
   fs.writeFile(
-    `regional-points.json`,
+    `./src/data-generation/datasets/regional-points.json`,
     JSON.stringify(pointsObject, null, 4),
     "utf8",
     (err) => {
