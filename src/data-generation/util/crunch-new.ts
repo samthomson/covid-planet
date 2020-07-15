@@ -5,7 +5,7 @@ import * as CoronaDataUtil from "./corona-data";
 import * as countries from "../datasets/regional-points.json";
 
 const pointsForRegion = (region) => {
-  return countries[region] || [];
+  return countries[region]?.points ?? [];
 };
 
 export const crunch = async () => {
