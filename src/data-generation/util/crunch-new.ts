@@ -3,6 +3,12 @@ import * as fs from "fs";
 import * as GeoJSONUtil from "./geoJSON";
 import * as CoronaDataUtil from "./corona-data";
 
+import * as countries from "../datasets/regional-points.json";
+
+const pointsForRegion = (region) => {
+  return countries[region] || [];
+};
+
 export const crunch = async () => {
   // get corona stats per country
   const coronaStats = await CoronaDataUtil.getStatsFromAPI();
@@ -54,13 +60,14 @@ export const crunch = async () => {
       return 0;
     })();
 
-    const geoJSONForRegion = GeoJSONUtil.getGeoJSONCountryByRegion(region);
-    const pointsForCountry = geoJSONForRegion
-      ? GeoJSONUtil.randomPointsWithinGeoJSONCountry(
-          pointsToAskFor,
-          geoJSONForRegion
-        )
-      : [];
+    // const geoJSONForRegion = GeoJSONUtil.getGeoJSONCountryByRegion(region);
+    const pointsForCountry = pointsForRegion(region);
+    // const pointsForCountry = geoJSONForRegion
+    //   ? GeoJSONUtil.randomPointsWithinGeoJSONCountry(
+    //       pointsToAskFor,
+    //       geoJSONForRegion
+    //     )
+    //   : [];
     const casesPerSecond = 86400 / cases;
     const deathPerSecond = 86400 / deaths;
 
