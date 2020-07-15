@@ -12,6 +12,7 @@
   },
   "scripts": {
     "generate-geojsons": "ts-node ./src/data-generation/generate-geojsons.ts",
+    "generate-points": "node -r ts-node/register --max-old-space-size=2048 ./src/data-generation/generate-points.ts",
     "crunch-latest": "node -r ts-node/register --max-old-space-size=1024 ./src/data-generation/manually-crunch-new.ts",
     "start": "node ./src/server.js",
     "forever": "forever start ./src/pseudo-cron.js",
