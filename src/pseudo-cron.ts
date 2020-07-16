@@ -1,6 +1,6 @@
-const CronJob = require("cron").CronJob;
+import { CronJob } from "cron";
 
-const crunch = require("./data-generation/util/crunch-new").crunch;
+import { crunch } from "./data-generation/util/crunch-new";
 
 // const cronFrequency = "0 0,6,12,18 * * *";
 const cronFrequency = "0,10,20,30,40,50 * * * *";
