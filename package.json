@@ -16,7 +16,7 @@
     "crunch-latest": "node -r ts-node/register --max-old-space-size=1024 ./src/data-generation/manually-crunch-new.ts",
     "start": "node ./src/server.js",
     "cron": "ts-node ./src/pseudo-cron.ts",
-    "forever": "forever start -c \"yarn run cron\"",
+    "forever": "forever start -c ts-node ./src/pseudo-cron.ts",
     "install-start": "yarn --silent && yarn run crunch-latest && yarn run start",
     "states": "ts-node ./src/data-generation/usStates.ts"
   },
