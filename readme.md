@@ -14,9 +14,6 @@ Built using:
 - [D3 js](https://d3js.org/) for the underlying planet visualisation
 - [Planetary js](http://planetaryjs.com/) to help with the planet visualisation; adding dots and handling zoom/etc events.
 
-## todo
+#### todo
 
-- deployment process, with regeneration of data
-- filled circles not rings
-- segmented data for large countries (eg states in the US); us, brazil, russia, india.
-- analytics
+- more segmented data for large countries: brazil, russia, india.
