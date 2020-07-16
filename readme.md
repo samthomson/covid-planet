@@ -1,6 +1,6 @@
 # covid-planet
 
-![covid-planet screenshot](./covid-planet.png)
+![covid-planet screenshot](./src/public/covid-planet.png)
 
 A realtime visualisation of the Covid-19 (Corona) virus; cases & deaths.
 
