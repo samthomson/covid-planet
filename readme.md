@@ -14,6 +14,14 @@ Built using:
 - [D3 js](https://d3js.org/) for the underlying planet visualisation
 - [Planetary js](http://planetaryjs.com/) to help with the planet visualisation; adding dots and handling zoom/etc events.
 
+## get running
+
+1. `docker-compose up` and go to `http://localhost`
+
+### pulling data locally
+
+Run `docker-compose run app yarn crunch-latest` in a  to populate data locally (this is done automatically in prod every x period)
+
 #### todo
 
 - more segmented data for large countries: brazil, russia, india.
