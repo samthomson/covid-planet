@@ -24,4 +24,5 @@ Run `docker-compose run app yarn crunch-latest` in a  to populate data locally (
 
 #### todo
 
-- more segmented data for large countries: brazil, russia, india.
+- more segmented data for large countries: brazil, russia, india, US.
+- flags panning along the bottom corresponding to countries.

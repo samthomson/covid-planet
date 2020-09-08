@@ -30,7 +30,7 @@ const getCountryCoronaData = async () => {
 
     const countryStats = summaryResp.data.Countries;
 
-    const omitCountries = ["US"];
+    const omitCountries = []; // add in 'US' when/if I later find US state data again
 
     const filteredCountries = countryStats.filter(
       (country) => !omitCountries.includes(country.CountryCode)
