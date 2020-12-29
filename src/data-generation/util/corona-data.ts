@@ -1,22 +1,32 @@
-import axios from "axios";
+import axios from "axios"
+import * as moment from 'moment'
 
 import * as validUSStates from "../datasets/validUSStates.json";
 
-const requestUSStateData = async (): Promise<[]> => {
+const keyValueValidUSStates = () => {
+  const states = {}
+  validUSStates.forEach(state => {
+    states[state.name] = state['alpha-2']
+  })
+  return states
+}
+
+export const requestUSStateData = async (): Promise<[]> => {
   try {
     const usStatesResponse = await axios.get(
-      "https://covid19api.io/api/v1/UnitedStateCasesByStates"
+      `https://covid-api.com/api/reports?date=${moment().add(-1, 'days').format('YYYY-MM-DD')}&iso=USA`
     );
-    const statesCoronaData = usStatesResponse.data.data[0].table;
-    const validStateCodes = getValidUSStateCodes();
+    const statesCoronaData = usStatesResponse.data.data
+    const validStateNames = getValidUSStateNames();
 
     const validUSStatesOnly = statesCoronaData.filter((prospectiveState) =>
-      validStateCodes.includes(prospectiveState.state)
+    validStateNames.includes(prospectiveState.region.province)
     );
+    const validUSStateKeys = keyValueValidUSStates()
     const filteredStateData = validUSStatesOnly.map((state) => ({
-      region: "US_" + state.state,
-      cases: state.positiveIncrease,
-      deaths: state.deathIncrease,
+      region: "US_" + validUSStateKeys[state.region.province],
+      cases: state.confirmed_diff,
+      deaths: state.deaths_diff,
     }));
     return filteredStateData;
   } catch {
@@ -30,7 +40,7 @@ const getCountryCoronaData = async () => {
 
     const countryStats = summaryResp.data.Countries;
 
-    const omitCountries = []; // add in 'US' when/if I later find US state data again
+    const omitCountries = ['US']; // add in 'US' when/if I later find US state data again
 
     const filteredCountries = countryStats.filter(
       (country) => !omitCountries.includes(country.CountryCode)
@@ -48,8 +58,8 @@ const getCountryCoronaData = async () => {
   }
 };
 
-const getValidUSStateCodes = (): string[] => {
-  return validUSStates.map((state) => state["alpha-2"]);
+const getValidUSStateNames = (): string[] => {
+  return validUSStates.map(({name}) => name);
 };
 
 export const getStatsFromAPI = async () => {
