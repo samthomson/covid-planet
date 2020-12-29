@@ -22,6 +22,10 @@ Built using:
 
 Run `docker-compose run app yarn crunch-latest` in a  to populate data locally (this is done automatically in prod every x period)
 
+## redeploy
+
+`bash ./remote-redeploy.sh`
+
 #### todo
 
 - more segmented data for large countries: brazil, russia, india, US.
